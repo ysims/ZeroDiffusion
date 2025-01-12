@@ -31,10 +31,16 @@ from dataset.dataset import ZSLESC50Dataset, ZSLFSC22Dataset
 from EarlyStopping import EarlyStopping
 from setup import setup
 
+import os
 import torch
 import torch.nn as nn
 
 args = setup()
+
+# Make folder if args.save_path folder does not exist
+# Remove file name from args.save_path
+if not os.path.exists(os.path.dirname(args.save_path)):
+    os.makedirs(os.path.dirname(args.save_path))
 
 if args.model == "VGGish":
     model = VGGNet(num_classes=len(args.train_classes)).to(args.device)
