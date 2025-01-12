@@ -67,8 +67,6 @@ def waveform_to_examples(data, sample_rate, num_mel_bins):
     if sample_rate != SAMPLE_RATE:
         data = resampy.resample(data, sample_rate, SAMPLE_RATE)
 
-    print("data.shape after resampling", data.shape)
-
     # Compute log mel spectrogram features.
     log_mel = mel_features.log_mel_spectrogram(
         data,
@@ -81,8 +79,6 @@ def waveform_to_examples(data, sample_rate, num_mel_bins):
         upper_edge_hertz=MEL_MAX_HZ,
     )
 
-    print("log_mel.shape", log_mel.shape)
-
     # Frame features into examples.
     features_sample_rate = 1.0 / STFT_HOP_LENGTH_SECONDS
     example_window_length = int(round(EXAMPLE_WINDOW_SECONDS * features_sample_rate))
@@ -91,8 +87,6 @@ def waveform_to_examples(data, sample_rate, num_mel_bins):
         log_mel, window_length=example_window_length, hop_length=example_hop_length
     )
 
-    print("log_mel_examples.shape", log_mel_examples.shape)
-    
     return log_mel_examples
 
 
