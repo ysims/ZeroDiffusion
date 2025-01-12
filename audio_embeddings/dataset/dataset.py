@@ -52,7 +52,6 @@ class ZSLESC50Dataset(Dataset):
             target = int(info[3])  # class, 0-49
             if train_classes.count(target) > 0:
                 wav_data = wavfile_to_examples(os.path.join(data_path, file), bins)
-                print("wav_data.shape", wav_data.shape)
                 if channels == 3:
                     self.audio.append(np.array([wav_data[0], wav_data[0], wav_data[0]]))
                 elif channels == 1:
@@ -90,7 +89,6 @@ class ZSLFSC22Dataset(Dataset):
             # Check if we want to train with this class
             if train_classes.count(target) > 0:
                 wav_data = wavfile_to_examples(os.path.join(data_path, file), bins)
-                print("wav_data.shape", wav_data.shape)
                 if channels == 3:
                     self.audio.append(np.array([wav_data[0], wav_data[0], wav_data[0]]))
                 elif channels == 1:
