@@ -32,8 +32,13 @@ import torch
 
 import gensim # word2vec
 from word2vec import word2vec # utility for word2vec
-from audio_embeddings.models.YAMNet import YAMNet # audio embedding model
-from audio_embeddings.inference import audio_to_embedding # inference of audio embedding model
+
+# Add ../audio_embeddings to path for imports
+import sys
+sibling_folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../audio_embeddings'))
+sys.path.append(sibling_folder_path)
+from models.YAMNet import YAMNet
+from inference import audio_to_embedding
 
 # Command line arguments
 parser = argparse.ArgumentParser()
@@ -91,8 +96,12 @@ data = {
     "auxiliary": [],
 }
 
-model = YAMNet(channels=1, num_classes=30)
-model.load_state_dict(torch.load(args.model_path, map_location=torch.device("cuda")))
+# Load the YAMNet model
+state_dict = torch.load(args.model_path, map_location=torch.device("cuda"))
+# Get the number of classes from the last layer
+num_classes = state_dict['classifier.weight'].shape[0]
+model = YAMNet(channels=1, num_classes=num_classes)
+model.load_state_dict(state_dict)
 model = model.to(args.device)
 model.eval()
 

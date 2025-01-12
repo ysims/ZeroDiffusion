@@ -18,7 +18,7 @@ def word2vec(model, label, double_first=False):
             num_words += 1
             v = model[part]
             # Either set the vector or add the two together
-            if vector == []:
+            if len(vector) == 0:
                 vector = v
             else:
                 vector = [(vector[i] + v[i]) for i in range(len(v))]
