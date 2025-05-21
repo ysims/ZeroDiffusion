@@ -73,14 +73,17 @@ def setup():
     elif args.dataset == "UrbanSound8k":
         # args.train_classes = [0, 1, 2, 4, 5, 7, 8]
         args.val_classes = [3, 6, 9]
+        args.test_classes = [3, 6, 9]
 
     elif args.dataset == "TAU2019":
         # args.train_classes = [2, 3, 4, 5, 7, 8, 9]
         args.val_classes = [0, 1, 6]
+        args.test_classes = [0, 1, 6]
 
     elif args.dataset == "GTZAN":
         # args.train_classes = [0, 1, 2, 6, 7, 8, 9]
         args.val_classes = [3, 4, 5]
+        args.test_classes = [3, 4, 5]
 
     elif args.dataset == "ARCA23K-FSD":
         args.test_classes = ['Female_singing', 'Wind_chime', 'Dishes_and_pots_and_pans', 'Scratching_(performance_technique)', 'Crying_and_sobbing', 'Waves_and_surf', 'Screaming', 'Bark', 'Camera', 'Organ']

@@ -70,7 +70,6 @@ def train_diffusion(config, fixed_config):
             # Gradient clipping
             torch.nn.utils.clip_grad_norm_(diffusion.parameters(), max_norm=1.0)
 
-
             diffusion_optimiser.step()
 
             train_loss += loss.item()
