@@ -37,7 +37,7 @@ def train_diffusion(config, fixed_config):
     ).to(fixed_config["device"])
 
     diffusion_optimiser = torch.optim.Adam(
-        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-4
+        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-5
     )
 
     # Set up dataset loaders

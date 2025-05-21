@@ -45,6 +45,12 @@ def setup():
         default="auto",
         help="Device to train on. Auto will check if cuda can be used, else it will use cpu.",
     )
+    parser.add_argument(
+        "--cls_dataset_size",
+        type=int,
+        default=100,
+        help="Number of classes to use for the classifier.",
+    )
 
     args = parser.parse_args()
 

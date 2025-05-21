@@ -58,16 +58,18 @@ fixed_config = {
 # All the tunable parameters for training
 config = {
     "diffusion_lr": 1e-3,
-    "diffusion_batch_size": 64,
+    "diffusion_batch_size": 16,
     "diffusion_hidden_dim": 128,
-    "diffusion_epoch": 2000,
-    "classifier_hidden_dim": 128,
-    "classifier_learning_rate": 1e-4,
-    "classifier_dataset_size": 50,  # this is per-class
+    "diffusion_epoch": 100,
+    "classifier_hidden_dim": 64,
+    "classifier_learning_rate": 1e-3,
+    "classifier_dataset_size": params.cls_dataset_size,  # this is per-class
     "classifier_batch_size": 52,
-    "classifier_epoch": 20,
+    "classifier_epoch": 5,
 }
-
+# 1e-3 16 128 100 64 1e-3 1440 52 10 
+# terminal 2 is with weight decay 1e-4
+# terminal 1 is with weight decay 1e-5 cls epoch 5
 seeds = [
     random.randrange(0, 9999999) for _ in range(0, 10)
 ]  # <- Train several times randomly
