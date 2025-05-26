@@ -30,7 +30,7 @@ from torch.utils.data import Dataset
 
 
 class DiffusionDataset(Dataset):
-    def __init__(self, diffusion_model, feature_size, class_aux, num_samples=50):
+    def __init__(self, diffusion_model, feature_size, class_aux, num_samples):
         self.data = []
         self.labels = []
 

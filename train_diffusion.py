@@ -56,7 +56,6 @@ def train_diffusion(config, fixed_config):
         train_loss = 0.0
         for _, features, auxiliary in train_loader:
             diffusion_optimiser.zero_grad()
-
             # Forward pass
             generated = diffusion(
                 diffusion.distort(features, epoch / config["diffusion_epoch"]),
@@ -95,8 +94,12 @@ def train_diffusion(config, fixed_config):
 
 def train(config, fixed_config):
     # Train the diffusion model
-    diffusion = train_diffusion(config, fixed_config)
-    diffusion.eval()
+    diffusion_models = []
+    for _ in range(5):
+        diffusion_models.append(train_diffusion(config, fixed_config))
+        diffusion_models[-1].eval()
+    # diffusion = train_diffusion(config, fixed_config)
+    # diffusion.eval()
 
     classifier = Compatibility(
         fixed_config["feature_dim"],
@@ -111,9 +114,20 @@ def train(config, fixed_config):
     )
 
     # Generate a dataset for the unseen classes using the diffusion network
-    gen_set = DiffusionDataset(
-        diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"]
-    )
+    gen_set = None
+    for diffusion in diffusion_models:
+        if gen_set is None:
+            gen_set = DiffusionDataset(
+                diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], int(config["classifier_dataset_size"]/len(diffusion_models))
+            )
+        else:
+            gen_set = torch.utils.data.ConcatDataset(
+                [gen_set, DiffusionDataset(diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"],int(config["classifier_dataset_size"]/len(diffusion_models)))]
+            )
+    
+    # gen_set = DiffusionDataset(
+    #     diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], config["classifier_dataset_size"]
+    # )
 
     train_gen_loader = torch.utils.data.DataLoader(
         gen_set, batch_size=config["classifier_batch_size"], shuffle=True
