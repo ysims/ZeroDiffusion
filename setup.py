@@ -26,6 +26,7 @@
 
 import argparse
 import torch
+import numpy as np
 
 def setup():
     parser = argparse.ArgumentParser()
@@ -46,10 +47,16 @@ def setup():
         help="Device to train on. Auto will check if cuda can be used, else it will use cpu.",
     )
     parser.add_argument(
-        "--cls_dataset_size",
+        "--synth_data_size",
         type=int,
         default=100,
-        help="Number of classes to use for the classifier.",
+        help="Number of data samples to generate from the diffusion model per class.",
+    )
+    parser.add_argument(
+        "--cls_epoch",
+        type=int,
+        default=20,
+        help="Number of epochs to train the classifier for.",
     )
 
     args = parser.parse_args()
@@ -92,18 +99,25 @@ def setup():
         args.test_classes = [3, 4, 5]
 
     elif args.dataset == "ARCA23K-FSD":
-        args.test_classes = ['Female_singing', 'Wind_chime', 'Dishes_and_pots_and_pans', 'Scratching_(performance_technique)', 'Crying_and_sobbing', 'Waves_and_surf', 'Screaming', 'Bark', 'Camera', 'Organ']
+        # args.test_classes = ['Female_singing', 'Wind_chime', 'Dishes_and_pots_and_pans', 'Scratching_(performance_technique)', 'Crying_and_sobbing', 'Waves_and_surf', 'Screaming', 'Bark', 'Camera', 'Organ']
+        args.test_classes = np.linspace(60, 69, 10)
+        args.val_classes = np.linspace(60, 69, 10)
         if args.split == "fold0":
-            args.val_classes = ['Crash_cymbal', 'Run', 'Zipper_(clothing)', 'Acoustic_guitar', 'Gong', 'Knock', 'Train', 'Crack', 'Cough', 'Cricket']
+            # args.val_classes = ['Crash_cymbal', 'Run', 'Zipper_(clothing)', 'Acoustic_guitar', 'Gong', 'Knock', 'Train', 'Crack', 'Cough', 'Cricket']
+            args.val_classes = np.linspace(0, 9, 10)
         elif args.split == "fold1":
-            args.val_classes = ['Electric_guitar', 'Chewing_and_mastication', 'Keys_jangling', 'Female_speech_and_woman_speaking', 'Crumpling_and_crinkling', 'Skateboard', 'Computer_keyboard', 'Bass_guitar', 'Stream', 'Toilet_flush']
+            # args.val_classes = ['Electric_guitar', 'Chewing_and_mastication', 'Keys_jangling', 'Female_speech_and_woman_speaking', 'Crumpling_and_crinkling', 'Skateboard', 'Computer_keyboard', 'Bass_guitar', 'Stream', 'Toilet_flush']
+            args.val_classes = np.linspace(10, 19, 10)
         elif args.split == "fold2":
-           args.val_classes = ['Tap', 'Water_tap_and_faucet', 'Squeak', 'Snare_drum', 'Finger_snapping', 'Walk_and_footsteps', 'Meow', 'Rattle_(instrument)', 'Bowed_string_instrument', 'Sawing']
+            # args.val_classes = ['Tap', 'Water_tap_and_faucet', 'Squeak', 'Snare_drum', 'Finger_snapping', 'Walk_and_footsteps', 'Meow', 'Rattle_(instrument)', 'Bowed_string_instrument', 'Sawing']
+            args.val_classes = np.linspace(20, 29, 10)
         elif args.split == "fold3":
-            args.val_classes = ['Rattle', 'Slam', 'Whoosh_and_swoosh_and_swish', 'Hammer', 'Fart', 'Harp', 'Coin_(dropping)', 'Printer', 'Boom', 'Giggle']
+            # args.val_classes = ['Rattle', 'Slam', 'Whoosh_and_swoosh_and_swish', 'Hammer', 'Fart', 'Harp', 'Coin_(dropping)', 'Printer', 'Boom', 'Giggle']
+            args.val_classes = np.linspace(30, 39, 10)
         elif args.split == "fold4":
-            args.val_classes = ['Clapping', 'Crushing', 'Livestock_and_farm_animals_and_working_animals', 'Scissors', 'Writing', 'Wind', 'Crackle', 'Tearing', 'Piano', 'Microwave_oven']
+            # args.val_classes = ['Clapping', 'Crushing', 'Livestock_and_farm_animals_and_working_animals', 'Scissors', 'Writing', 'Wind', 'Crackle', 'Tearing', 'Piano', 'Microwave_oven']
+            args.val_classes = np.linspace(40, 49, 10)
         elif args.split == "fold5":
-            args.val_classes = ['Trumpet', 'Wind_instrument_and_woodwind_instrument', 'Child_speech_and_kid_speaking', 'Drill', 'Thump_and_thud', 'Drawer_open_or_close', 'Male_speech_and_man_speaking', 'Gunshot_and_gunfire', 'Burping_and_eructation', 'Splash_and_splatter']
-
+            # args.val_classes = ['Trumpet', 'Wind_instrument_and_woodwind_instrument', 'Child_speech_and_kid_speaking', 'Drill', 'Thump_and_thud', 'Drawer_open_or_close', 'Male_speech_and_man_speaking', 'Gunshot_and_gunfire', 'Burping_and_eructation', 'Splash_and_splatter']
+            args.val_classes = np.linspace(50, 59, 10)
     return args
