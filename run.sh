@@ -1,3 +1,4 @@
+mkdir results
 python3 train.py ../pickles/tau2019/YAMNet_synonyms_test.pickle --dataset TAU2019 --split test --cls_dataset_size 1440 > results/tau2019.txt
 python3 train.py ../pickles/urbansound8k/YAMNet_synonyms_test.pickle --dataset UrbanSound8k --split test --cls_dataset_size 873 > results/urbansound8k.txt
 python3 train.py ../pickles/gtzan/YAMNet_synonyms_test.pickle --dataset GTZAN --split test --cls_dataset_size 100 > results/gtzan.txt

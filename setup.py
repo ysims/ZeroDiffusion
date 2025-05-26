@@ -47,7 +47,7 @@ def setup():
         help="Device to train on. Auto will check if cuda can be used, else it will use cpu.",
     )
     parser.add_argument(
-        "--synth_data_size",
+        "--cls_dataset_size",
         type=int,
         default=100,
         help="Number of data samples to generate from the diffusion model per class.",
