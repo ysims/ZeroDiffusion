@@ -25,12 +25,34 @@
 # This file contains the ESC50Dataset class, which is a PyTorch Dataset, and a function to create ESC50 datasets
 # The function returns validation and training datasets, and some dataset parameters
 
+
 import numpy as np
 import pickle
 import sys
 import torch
+from concurrent.futures import ThreadPoolExecutor
 
 np.set_printoptions(threshold=sys.maxsize)
+
+
+def process_sample(i, all_labels, all_features, all_auxiliary, split, val_classes, test_classes):
+    """Process a single sample and classify it into train or validation."""
+    label = all_labels[i]
+    feature = all_features[i]
+    auxiliary = all_auxiliary[i]
+
+    if split == "test":
+        if label in test_classes:
+            return "val", label, feature, auxiliary
+        else:
+            return "train", label, feature, auxiliary
+    else:
+        if label in test_classes:
+            return None  # Skip test classes
+        elif label in val_classes:
+            return "val", label, feature, auxiliary
+        else:
+            return "train", label, feature, auxiliary
 
 
 def create_esc50_datasets(file, split, val_classes, test_classes, device):
@@ -41,37 +63,39 @@ def create_esc50_datasets(file, split, val_classes, test_classes, device):
     all_features = np.array([list(d.to("cpu")[0]) for d in data["features"]])
     all_auxiliary = np.array(data["auxiliary"])
 
-    train_labels = []
-    train_features = []
-    train_auxiliary = []
+    train_labels, train_features, train_auxiliary = [], [], []
+    val_labels, val_features, val_auxiliary = [], [], []
 
-    val_labels = []
-    val_features = []
-    val_auxiliary = []
+    # Parallelize the loop using ThreadPoolExecutor
+    with ThreadPoolExecutor() as executor:
+        results = list(
+            executor.map(
+                process_sample,
+                range(len(all_labels)),
+                [all_labels] * len(all_labels),
+                [all_features] * len(all_labels),
+                [all_auxiliary] * len(all_labels),
+                [split] * len(all_labels),
+                [val_classes] * len(all_labels),
+                [test_classes] * len(all_labels),
+            )
+        )
 
-    for i in range(len(all_labels)):
-        if split == "test":
-            # Test classes are val classes, since then it all works nicely
-            if all_labels[i] in test_classes:
-                val_labels.append(all_labels[i])
-                val_features.append(all_features[i])
-                val_auxiliary.append(all_auxiliary[i])
-            else:
-                train_labels.append(all_labels[i])
-                train_features.append(all_features[i])
-                train_auxiliary.append(all_auxiliary[i])
-        else:
-            if all_labels[i] in test_classes:
-                continue  # skip the test classes, should not appear in the 4-fold cross-val
-            elif all_labels[i] in val_classes:
-                val_labels.append(all_labels[i])
-                val_features.append(all_features[i])
-                val_auxiliary.append(all_auxiliary[i])
-            else:
-                train_labels.append(all_labels[i])
-                train_features.append(all_features[i])
-                train_auxiliary.append(all_auxiliary[i])
+    # Collect results
+    for result in results:
+        if result is None:
+            continue
+        category, label, feature, auxiliary = result
+        if category == "train":
+            train_labels.append(label)
+            train_features.append(feature)
+            train_auxiliary.append(auxiliary)
+        elif category == "val":
+            val_labels.append(label)
+            val_features.append(feature)
+            val_auxiliary.append(auxiliary)
 
+    # Convert to tensors and remove duplicates
     unique_val_auxiliary = torch.tensor(
         np.unique([tuple(a) for a in val_auxiliary], axis=0)
     ).to(device)
