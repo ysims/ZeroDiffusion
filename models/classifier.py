@@ -29,8 +29,6 @@ class Compatibility(nn.Module):
         self.fc1 = nn.Linear(d_in, hidden_units, bias=False)
         self.fc2 = nn.Linear(hidden_units, d_out, bias=False)
 
-        # self.fc = nn.Linear(d_in, d_out, bias=False)
-
         self.init_weights()
 
     def init_weights(self):

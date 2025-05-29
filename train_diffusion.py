@@ -28,6 +28,7 @@ from models.diffusion import Diffusion
 from models.classifier import Compatibility
 from dataloader.diffusion import DiffusionDataset
 import torch
+from models.warp import WARP
 
 def train_diffusion(config, fixed_config):
     diffusion = Diffusion(
@@ -98,6 +99,7 @@ def train(config, fixed_config):
     for _ in range(5):
         diffusion_models.append(train_diffusion(config, fixed_config))
         diffusion_models[-1].eval()
+
     # diffusion = train_diffusion(config, fixed_config)
     # diffusion.eval()
 
@@ -106,11 +108,12 @@ def train(config, fixed_config):
         fixed_config["auxiliary_dim"],
     ).to(fixed_config["device"])
 
-    criterion = torch.nn.CrossEntropyLoss()
+    criterion = WARP
+    # criterion = torch.nn.CrossEntropyLoss()
     optimiser = torch.optim.Adam(
         classifier.parameters(),
         lr=config["classifier_learning_rate"],
-        weight_decay=1e-5,
+        weight_decay=1e-4,
     )
 
     # Generate a dataset for the unseen classes using the diffusion network
@@ -254,7 +257,7 @@ def train(config, fixed_config):
             predicted = classifier(data.to(fixed_config["device"]), val_aux)
 
             loss = criterion(predicted, labels_)
-            val_loss = loss.item() * data.size(0)
+            val_loss += loss.item() / data.size(0)
 
             # Get the predicted labels
             _, predicted_labels = torch.max(predicted, dim=1)
