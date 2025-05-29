@@ -37,7 +37,7 @@ def train_diffusion(config, fixed_config):
     ).to(fixed_config["device"])
 
     diffusion_optimiser = torch.optim.Adam(
-        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-5
+        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-4
     )
 
     # Set up dataset loaders
@@ -237,6 +237,7 @@ def train(config, fixed_config):
         # Evaluation loop
         val_count = 0.0
         val_loss = 0.0
+        val_acc = 0.0
 
         val_aux = fixed_config["val_auxiliary"].float().to(fixed_config["device"])
 
@@ -261,7 +262,7 @@ def train(config, fixed_config):
             # Calculate the number of correct predictions
             correct_predictions = (predicted_labels == labels_).sum().item()
 
-            # Calculate the accuracy
+            # Calculate the accuracy with respect to the batch size
             accuracy = correct_predictions / labels_.size(0)
 
             val_acc += accuracy
