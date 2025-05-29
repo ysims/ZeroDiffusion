@@ -78,16 +78,19 @@ def train_diffusion(config, fixed_config):
 
         # Evaluation loop
         diffusion.eval()
+        loss = 0.0
         for _, features, auxiliary in val_loader:
             generated = diffusion(
                 diffusion.distort(features, epoch / config["diffusion_epoch"]),
                 auxiliary,
             )
-            loss = torch.nn.functional.mse_loss(generated, features)
+            loss += torch.nn.functional.mse_loss(generated, features)
+
+        loss /= len(val_loader)
 
         if epoch % 100 == 0:
             print(
-                f"Epoch {epoch+1} \t Loss: {train_loss:.6f} \tVal Loss: {loss.item():.6f}"
+                f"Epoch {epoch+1} \t Loss: {train_loss:.6f} \tVal Loss: {loss:.6f}"
             )
 
     return diffusion
