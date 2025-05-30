@@ -38,7 +38,7 @@ def train_diffusion(config, fixed_config):
     ).to(fixed_config["device"])
 
     diffusion_optimiser = torch.optim.Adam(
-        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-4
+        diffusion.parameters(), lr=config["diffusion_lr"], weight_decay=1e-5
     )
 
     # Set up dataset loaders
@@ -111,12 +111,12 @@ def train(config, fixed_config):
         fixed_config["auxiliary_dim"],
     ).to(fixed_config["device"])
 
-    criterion = WARP
-    # criterion = torch.nn.CrossEntropyLoss()
+    # criterion = WARP
+    criterion = torch.nn.CrossEntropyLoss()
     optimiser = torch.optim.Adam(
         classifier.parameters(),
         lr=config["classifier_learning_rate"],
-        weight_decay=1e-4,
+        weight_decay=1e-5,
     )
 
     # Generate a dataset for the unseen classes using the diffusion network

@@ -1,5 +1,5 @@
 mkdir results
-python3 train.py ../pickles/tau2019/YAMNet_synonyms_test.pickle --dataset TAU2019 --split test --cls_dataset_size 1440 > results/tau2019.txt
+export PYTHONUNBUFFERED=1
 python3 train.py ../pickles/urbansound8k/YAMNet_synonyms_test.pickle --dataset UrbanSound8k --split test --cls_dataset_size 873 > results/urbansound8k.txt
 python3 train.py ../pickles/gtzan/YAMNet_synonyms_test.pickle --dataset GTZAN --split test --cls_dataset_size 100 > results/gtzan.txt
 python3 train.py ../pickles/esc50/ESC_50_synonyms/fold04.pickle --dataset ESC-50 --split fold0 --cls_dataset_size 40 > results/escfold0.txt
