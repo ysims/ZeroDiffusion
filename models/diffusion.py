@@ -37,6 +37,7 @@ class Diffusion(nn.Module):
             # nn.LeakyReLU(0.01),
             nn.BatchNorm1d(hidden_dim),
             nn.LeakyReLU(inplace=True),
+            nn.Dropout(0.3),
             nn.Linear(hidden_dim, input_dim),
             nn.Tanh(),
         )
@@ -45,6 +46,9 @@ class Diffusion(nn.Module):
         # Ensure x and aux are 2D tensors
         x = x if x.dim() > 1 else x.unsqueeze(0)
         aux = aux if aux.dim() > 1 else aux.unsqueeze(0)
+
+        # Jitter aux
+        aux = aux + torch.randn_like(aux) * 0.05
 
         x = torch.cat((x, aux), dim=1)  # concatenate x and aux
         x = self.layers(x)
