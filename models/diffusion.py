@@ -48,7 +48,7 @@ class Diffusion(nn.Module):
         aux = aux if aux.dim() > 1 else aux.unsqueeze(0)
 
         # Jitter aux
-        aux = aux + torch.randn_like(aux) * 0.05
+        aux = aux + torch.randn_like(aux) * 0.1
 
         x = torch.cat((x, aux), dim=1)  # concatenate x and aux
         x = self.layers(x)

@@ -43,7 +43,7 @@ class DiffusionDataset(Dataset):
                 # Ensure c is a tensor of the same data type as the input tensor
                 c_ = c.clone().detach().to(device).float()
                 # Add noise to the class auxiliary vector
-                aux_noise = c_ + torch.randn_like(c_) * 0.05
+                aux_noise = c_ + torch.randn_like(c_) * 0.0
                 # Generate a random sample and move it to the model's device
                 # print dtype of inputs
                 sample = diffusion_model(torch.randn(feature_size).to(device) * 0.1, aux_noise)
