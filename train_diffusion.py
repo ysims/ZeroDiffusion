@@ -86,13 +86,13 @@ def train_diffusion(config, fixed_config):
             )
 
             loss = torch.nn.functional.mse_loss(generated, features)
-            loss += 1 * compute_mmd(generated, features)
+            loss += 1.0 * compute_mmd(generated, features)
             loss += 0.1 * variance_loss(generated, features)
             loss += 0.2 * torch.nn.functional.mse_loss(generated.mean(dim=0), features.mean(dim=0))
 
             cos_sim = torch.nn.functional.cosine_similarity(generated, features, dim=1)
-            cos_loss = 1 - cos_sim.mean()
-            loss += 2 * cos_loss
+            cos_loss = 1.0 - cos_sim.mean()
+            loss += 2.0 * cos_loss
 
             # print(torch.nn.functional.mse_loss(generated, features),
             #       compute_mmd(generated, features),
@@ -198,86 +198,86 @@ def train(config, fixed_config):
         shuffle=True,
     )
     # Collect data and labels from the DataLoader
-    gen_data_list = []
-    gen_labels_list = []
+    # gen_data_list = []
+    # gen_labels_list = []
 
-    for data, labels in train_gen_loader:
-        labels_ = torch.tensor(
-            [
-                torch.where(torch.all(all_aux == label, dim=1))[0][0]
-                for label in labels.detach()
-            ]
-        ).to(fixed_config["device"])
-        # Collapse the batch dimension
-        data = data.view(data.size(0), -1)  # Flatten all dimensions except the batch size
-        labels_ = labels_.view(-1)  # Flatten labels if needed
-        gen_data_list.append(data.cpu().detach().numpy())
-        gen_labels_list.append(labels_.cpu().detach().numpy())
+    # for data, labels in train_gen_loader:
+    #     labels_ = torch.tensor(
+    #         [
+    #             torch.where(torch.all(all_aux == label, dim=1))[0][0]
+    #             for label in labels.detach()
+    #         ]
+    #     ).to(fixed_config["device"])
+    #     # Collapse the batch dimension
+    #     data = data.view(data.size(0), -1)  # Flatten all dimensions except the batch size
+    #     labels_ = labels_.view(-1)  # Flatten labels if needed
+    #     gen_data_list.append(data.cpu().detach().numpy())
+    #     gen_labels_list.append(labels_.cpu().detach().numpy())
 
-    real_data_list = []
-    real_labels_list = []
-    # Compare with real unseen data
-    for _, data, labels in val_loader:
-        labels_ = torch.tensor(
-            [
-                torch.where(torch.all(all_aux == label, dim=1))[0][0]
-                for label in labels.detach()
-            ]
-        ).to(fixed_config["device"])
-        # Collapse the batch dimension
-        data = data.view(data.size(0), -1)
-        labels_ = labels_.view(-1)
-        real_data_list.append(data.cpu().detach().numpy())
-        real_labels_list.append(labels_.cpu().detach().numpy())
+    # real_data_list = []
+    # real_labels_list = []
+    # # Compare with real unseen data
+    # for _, data, labels in val_loader:
+    #     labels_ = torch.tensor(
+    #         [
+    #             torch.where(torch.all(all_aux == label, dim=1))[0][0]
+    #             for label in labels.detach()
+    #         ]
+    #     ).to(fixed_config["device"])
+    #     # Collapse the batch dimension
+    #     data = data.view(data.size(0), -1)
+    #     labels_ = labels_.view(-1)
+    #     real_data_list.append(data.cpu().detach().numpy())
+    #     real_labels_list.append(labels_.cpu().detach().numpy())
 
 
-    # Convert lists to numpy arrays
-    gen_data = np.concatenate(gen_data_list, axis=0)
-    gen_labels = np.concatenate(gen_labels_list, axis=0)
-    real_data = np.concatenate(real_data_list, axis=0)
-    real_labels = np.concatenate(real_labels_list, axis=0)
+    # # Convert lists to numpy arrays
+    # gen_data = np.concatenate(gen_data_list, axis=0)
+    # gen_labels = np.concatenate(gen_labels_list, axis=0)
+    # real_data = np.concatenate(real_data_list, axis=0)
+    # real_labels = np.concatenate(real_labels_list, axis=0)
 
-    # Perform t-SNE visualization
+    # # Perform t-SNE visualization
 
-    tsne = TSNE(n_components=2, perplexity=10, n_iter=1000)
-    combined_data = np.concatenate((gen_data, real_data), axis=0)
-    gen_data_embedded = tsne.fit_transform(combined_data)
+    # tsne = TSNE(n_components=2, perplexity=10, n_iter=1000)
+    # combined_data = np.concatenate((gen_data, real_data), axis=0)
+    # gen_data_embedded = tsne.fit_transform(combined_data)
 
-    combined_labels = np.concatenate((gen_labels, real_labels), axis=0)
-    plt.figure(figsize=(10, 10))
-    sns.scatterplot(
-        x=gen_data_embedded[:, 0],
-        y=gen_data_embedded[:, 1],
-        hue=combined_labels,
-        palette="Set1",
-        legend="full",
-    )
-    plt.title("t-SNE of Generated Data")
-    plt.show()
+    # combined_labels = np.concatenate((gen_labels, real_labels), axis=0)
+    # plt.figure(figsize=(10, 10))
+    # sns.scatterplot(
+    #     x=gen_data_embedded[:, 0],
+    #     y=gen_data_embedded[:, 1],
+    #     hue=combined_labels,
+    #     palette="Set1",
+    #     legend="full",
+    # )
+    # plt.title("t-SNE of Generated Data")
+    # plt.show()
 
     # Calculate the mean distance between generated and real data
-    gen_data_tensor = torch.tensor(gen_data, dtype=torch.float32).to(fixed_config["device"])
-    real_data_tensor = torch.tensor(real_data, dtype=torch.float32).to(fixed_config["device"])
-    # make same size
-    if gen_data_tensor.size(0) != real_data_tensor.size(0):
-        min_size = min(gen_data_tensor.size(0), real_data_tensor.size(0))
-        gen_data_tensor = gen_data_tensor[:min_size]
-        real_data_tensor = real_data_tensor[:min_size]
+    # gen_data_tensor = torch.tensor(gen_data, dtype=torch.float32).to(fixed_config["device"])
+    # real_data_tensor = torch.tensor(real_data, dtype=torch.float32).to(fixed_config["device"])
+    # # make same size
+    # if gen_data_tensor.size(0) != real_data_tensor.size(0):
+    #     min_size = min(gen_data_tensor.size(0), real_data_tensor.size(0))
+    #     gen_data_tensor = gen_data_tensor[:min_size]
+    #     real_data_tensor = real_data_tensor[:min_size]
 
-    mean_distance = torch.mean(torch.norm(gen_data_tensor - real_data_tensor, dim=1))
-    # Calculate the covariance difference
-    gen_cov = torch.cov(gen_data_tensor.T)
-    real_cov = torch.cov(real_data_tensor.T)
-    cov_diff = torch.norm(gen_cov - real_cov)
-    # Calculate cosine similarity
-    gen_data_tensor = torch.nn.functional.normalize(gen_data_tensor, dim=1)
-    real_data_tensor = torch.nn.functional.normalize(real_data_tensor, dim=1)
-    cosine_similarity = torch.nn.functional.cosine_similarity(gen_data_tensor, real_data_tensor, dim=1)
-    mean_cosine_similarity = torch.mean(cosine_similarity)
+    # mean_distance = torch.mean(torch.norm(gen_data_tensor - real_data_tensor, dim=1))
+    # # Calculate the covariance difference
+    # gen_cov = torch.cov(gen_data_tensor.T)
+    # real_cov = torch.cov(real_data_tensor.T)
+    # cov_diff = torch.norm(gen_cov - real_cov)
+    # # Calculate cosine similarity
+    # gen_data_tensor = torch.nn.functional.normalize(gen_data_tensor, dim=1)
+    # real_data_tensor = torch.nn.functional.normalize(real_data_tensor, dim=1)
+    # cosine_similarity = torch.nn.functional.cosine_similarity(gen_data_tensor, real_data_tensor, dim=1)
+    # mean_cosine_similarity = torch.mean(cosine_similarity)
 
-    print("Mean cosine similarity:", mean_cosine_similarity.item())
-    print("Mean distance:", mean_distance.item())
-    print("Covariance diff:", cov_diff.item())
+    # print("Mean cosine similarity:", mean_cosine_similarity.item())
+    # print("Mean distance:", mean_distance.item())
+    # print("Covariance diff:", cov_diff.item())
 
     # Keep track of val accuracy for when returning
     val_acc = 0.0

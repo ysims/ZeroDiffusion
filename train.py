@@ -58,7 +58,7 @@ fixed_config = {
 # All the tunable parameters for training
 config = {
     "diffusion_lr": 1e-3,
-    "diffusion_batch_size": 32,
+    "diffusion_batch_size": 64,
     "diffusion_hidden_dim": 128,
     "diffusion_epoch": 50,
     "classifier_hidden_dim": 128,

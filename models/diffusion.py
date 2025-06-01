@@ -35,7 +35,7 @@ class Diffusion(nn.Module):
         self.layers = nn.Sequential(
             nn.Linear(input_dim + aux_dim, hidden_dim),
             # nn.LeakyReLU(0.01),
-            nn.BatchNorm1d(hidden_dim),
+            # nn.BatchNorm1d(hidden_dim),
             nn.LeakyReLU(inplace=True),
             nn.Dropout(0.3),
             nn.Linear(hidden_dim, input_dim),
