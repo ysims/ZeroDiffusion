@@ -86,7 +86,7 @@ def train_diffusion(config, fixed_config):
             )
 
             loss = torch.nn.functional.mse_loss(generated, features)
-            loss += 1.0 * compute_mmd(generated, features)
+            loss = 1.0 * compute_mmd(generated, features)
             loss += 0.1 * variance_loss(generated, features)
             loss += 0.2 * torch.nn.functional.mse_loss(generated.mean(dim=0), features.mean(dim=0))
 
@@ -132,13 +132,13 @@ def train_diffusion(config, fixed_config):
 
 def train(config, fixed_config):
     # Train the diffusion model
-    diffusion_models = []
-    for _ in range(1):
-        diffusion_models.append(train_diffusion(config, fixed_config))
-        diffusion_models[-1].eval()
+    # diffusion_models = []
+    # for _ in range(1):
+    #     diffusion_models.append(train_diffusion(config, fixed_config))
+    #     diffusion_models[-1].eval()
 
-    # diffusion = train_diffusion(config, fixed_config)
-    # diffusion.eval()
+    diffusion = train_diffusion(config, fixed_config)
+    diffusion.eval()
 
     classifier = Compatibility(
         fixed_config["feature_dim"],
@@ -154,21 +154,20 @@ def train(config, fixed_config):
     )
 
     # Generate a dataset for the unseen classes using the diffusion network
-    gen_set = None
-    for diffusion in diffusion_models:
-        if gen_set is None:
-            gen_set = DiffusionDataset(
-                diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], int(config["classifier_dataset_size"]/len(diffusion_models))
-            )
-        else:
-            gen_set = torch.utils.data.ConcatDataset(
-                [gen_set, DiffusionDataset(diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"],int(config["classifier_dataset_size"]/len(diffusion_models)))]
-            )
+    # gen_set = None
+    # for diffusion in diffusion_models:
+    #     if gen_set is None:
+    #         gen_set = DiffusionDataset(
+    #             diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], int(config["classifier_dataset_size"]/len(diffusion_models))
+    #         )
+    #     else:
+    #         gen_set = torch.utils.data.ConcatDataset(
+    #             [gen_set, DiffusionDataset(diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"],int(config["classifier_dataset_size"]/len(diffusion_models)))]
+    #         )
     
-    # gen_set = DiffusionDataset(
-    #     diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], config["classifier_dataset_size"]
-    # )
-
+    gen_set = DiffusionDataset(
+        diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], config["classifier_dataset_size"]
+    )
 
     all_aux = (
         torch.cat(

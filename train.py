@@ -60,12 +60,12 @@ config = {
     "diffusion_lr": 1e-3,
     "diffusion_batch_size": 64,
     "diffusion_hidden_dim": 128,
-    "diffusion_epoch": 50,
+    "diffusion_epoch": 100,
     "classifier_hidden_dim": 128,
     "classifier_learning_rate": 1e-4,
     "classifier_dataset_size": params.cls_dataset_size,  # this is per-class
     "classifier_batch_size": 64,
-    "classifier_epoch": 20,
+    "classifier_epoch": 25,
 }# T1 has cls batch 64
 # 1e-3 16 128 100 64 1e-3 1440 52 10
 
