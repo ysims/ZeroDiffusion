@@ -65,7 +65,7 @@ config = {
     "classifier_learning_rate": 1e-4,
     "classifier_dataset_size": params.cls_dataset_size,  # this is per-class
     "classifier_batch_size": 64,
-    "classifier_epoch": 25,
+    "classifier_epoch": 20,
 }# T1 has cls batch 64
 # 1e-3 16 128 100 64 1e-3 1440 52 10
 
