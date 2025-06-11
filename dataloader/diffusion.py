@@ -30,7 +30,7 @@ from torch.utils.data import Dataset
 
 
 class DiffusionDataset(Dataset):
-    def __init__(self, diffusion_model, feature_size, class_aux, num_samples):
+    def __init__(self, diffusion_model, feature_size, class_aux, num_samples, norm):
         self.data = []
         self.labels = []
 
@@ -45,8 +45,10 @@ class DiffusionDataset(Dataset):
                 # Add noise to the class auxiliary vector
                 aux_noise = c_ + torch.randn_like(c_) * 0.0
                 # Generate a random sample and move it to the model's device
-                # print dtype of inputs
-                sample = diffusion_model(torch.randn(feature_size).to(device) * 0.1, aux_noise)
+                # The random sample should have a norm similar to training samples
+                noise = torch.randn(feature_size).to(device)
+                noise = (noise / noise.norm()) * norm  
+                sample = diffusion_model(noise, aux_noise)
                 self.data.append(sample)
                 self.labels.append(c_)
 

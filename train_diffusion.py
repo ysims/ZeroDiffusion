@@ -94,11 +94,6 @@ def train_diffusion(config, fixed_config):
             cos_loss = 1.0 - cos_sim.mean()
             loss += 2.0 * cos_loss
 
-            # print(torch.nn.functional.mse_loss(generated, features),
-            #       compute_mmd(generated, features),
-            #       variance_loss(generated, features),
-            #       torch.nn.functional.mse_loss(generated.mean(dim=0), features.mean(dim=0)),
-            #       cos_loss)
             loss.backward()
 
             # Gradient clipping
@@ -132,11 +127,6 @@ def train_diffusion(config, fixed_config):
 
 def train(config, fixed_config):
     # Train the diffusion model
-    # diffusion_models = []
-    # for _ in range(1):
-    #     diffusion_models.append(train_diffusion(config, fixed_config))
-    #     diffusion_models[-1].eval()
-
     diffusion = train_diffusion(config, fixed_config)
     diffusion.eval()
 
@@ -153,20 +143,18 @@ def train(config, fixed_config):
         weight_decay=1e-5,
     )
 
-    # Generate a dataset for the unseen classes using the diffusion network
-    # gen_set = None
-    # for diffusion in diffusion_models:
-    #     if gen_set is None:
-    #         gen_set = DiffusionDataset(
-    #             diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], int(config["classifier_dataset_size"]/len(diffusion_models))
-    #         )
-    #     else:
-    #         gen_set = torch.utils.data.ConcatDataset(
-    #             [gen_set, DiffusionDataset(diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"],int(config["classifier_dataset_size"]/len(diffusion_models)))]
-    #         )
-    
+    # Get the average norm of the training set
+    # Get the average norm of the training set
+    norm = torch.tensor(
+        [
+            features.norm() if features.dim() == 1 else torch.norm(features, dim=1).mean()
+            for _, features, _ in fixed_config["train_set"]
+        ]
+    ).mean().to(fixed_config["device"])
+
+    # Generate the dataset for the unseen classes
     gen_set = DiffusionDataset(
-        diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], config["classifier_dataset_size"]
+        diffusion, fixed_config["feature_dim"], fixed_config["val_auxiliary"], config["classifier_dataset_size"], norm
     )
 
     all_aux = (

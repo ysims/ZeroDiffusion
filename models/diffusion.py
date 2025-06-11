@@ -54,8 +54,14 @@ class Diffusion(nn.Module):
         x = self.layers(x)
         return x
 
-    # Distort the input data by adding Gaussian noise
+    # Distort the input data by interpolating between x and a noise vector of the same norm
     def distort(self, x, epoch_percentage):
-        noise_std = 0.1 * epoch_percentage  # Scale the noise standard deviation with epoch percentage
-        noise = torch.randn_like(x) * noise_std
-        return x + noise
+        # Generate random noise
+        noise = torch.randn_like(x)
+        # Compute norms
+        x_norm = x.norm(dim=1, keepdim=True)
+        noise_norm = noise.norm(dim=1, keepdim=True)
+        # Scale noise to have the same norm as x
+        scaled_noise = noise / (noise_norm + 1e-8) * x_norm
+        # Interpolate between x and scaled_noise
+        return (1 - epoch_percentage) * x + epoch_percentage * scaled_noise
