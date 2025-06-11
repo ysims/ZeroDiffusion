@@ -85,7 +85,7 @@ def train_diffusion(config, fixed_config):
                 auxiliary,
             )
 
-            loss = 0.0 * torch.nn.functional.mse_loss(generated, features)
+            loss = 1.0 * torch.nn.functional.mse_loss(generated, features)
             loss += 1.0 * compute_mmd(generated, features)
             loss += 0.1 * variance_loss(generated, features)
             loss += 0.2 * torch.nn.functional.mse_loss(generated.mean(dim=0), features.mean(dim=0))
