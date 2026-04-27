@@ -24,33 +24,10 @@
 
 # The main training functions for the ZeroDiffusion method 
 
-from models.diffusion import Diffusion
+from models.dae import Diffusion
 from models.classifier import Compatibility
 from dataloader.diffusion import DiffusionDataset
 import torch
-from models.warp import WARP
-
-import numpy as np
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-def compute_mmd(x, y, sigma=1.0):
-    def rbf(x1, x2):
-        diff = x1.unsqueeze(1) - x2.unsqueeze(0)
-        dist_sq = (diff ** 2).sum(2)
-        return torch.exp(-dist_sq / (2 * sigma ** 2))
-
-    k_xx = rbf(x, x)
-    k_yy = rbf(y, y)
-    k_xy = rbf(x, y)
-
-    return k_xx.mean() + k_yy.mean() - 2 * k_xy.mean()
-
-def variance_loss(gen, real):
-    var_gen = gen.var(dim=0)
-    var_real = real.var(dim=0)
-    return torch.nn.functional.mse_loss(var_gen, var_real)
 
 def train_diffusion(config, fixed_config):
     diffusion = Diffusion(
@@ -85,22 +62,12 @@ def train_diffusion(config, fixed_config):
                 auxiliary,
             )
 
-            loss = 1.0 * torch.nn.functional.mse_loss(generated, features)
-            loss += 1.0 * compute_mmd(generated, features)
-            loss += 0.1 * variance_loss(generated, features)
-            loss += 0.2 * torch.nn.functional.mse_loss(generated.mean(dim=0), features.mean(dim=0))
-
-            cos_sim = torch.nn.functional.cosine_similarity(generated, features, dim=1)
-            cos_loss = 1.0 - cos_sim.mean()
-            loss += 2.0 * cos_loss
-
+            loss = torch.nn.functional.mse_loss(generated, features)
             loss.backward()
 
             # Gradient clipping
             torch.nn.utils.clip_grad_norm_(diffusion.parameters(), max_norm=1.0)
-
             diffusion_optimiser.step()
-
             train_loss += loss.item()
 
         train_loss /= len(train_loader)
@@ -135,7 +102,6 @@ def train(config, fixed_config):
         fixed_config["auxiliary_dim"],
     ).to(fixed_config["device"])
 
-    # criterion = WARP
     criterion = torch.nn.CrossEntropyLoss()
     optimiser = torch.optim.Adam(
         classifier.parameters(),
@@ -143,7 +109,6 @@ def train(config, fixed_config):
         weight_decay=1e-5,
     )
 
-    # Get the average norm of the training set
     # Get the average norm of the training set
     norm = torch.tensor(
         [
@@ -184,87 +149,6 @@ def train(config, fixed_config):
         batch_size=config["classifier_batch_size"],
         shuffle=True,
     )
-    # Collect data and labels from the DataLoader
-    # gen_data_list = []
-    # gen_labels_list = []
-
-    # for data, labels in train_gen_loader:
-    #     labels_ = torch.tensor(
-    #         [
-    #             torch.where(torch.all(all_aux == label, dim=1))[0][0]
-    #             for label in labels.detach()
-    #         ]
-    #     ).to(fixed_config["device"])
-    #     # Collapse the batch dimension
-    #     data = data.view(data.size(0), -1)  # Flatten all dimensions except the batch size
-    #     labels_ = labels_.view(-1)  # Flatten labels if needed
-    #     gen_data_list.append(data.cpu().detach().numpy())
-    #     gen_labels_list.append(labels_.cpu().detach().numpy())
-
-    # real_data_list = []
-    # real_labels_list = []
-    # # Compare with real unseen data
-    # for _, data, labels in val_loader:
-    #     labels_ = torch.tensor(
-    #         [
-    #             torch.where(torch.all(all_aux == label, dim=1))[0][0]
-    #             for label in labels.detach()
-    #         ]
-    #     ).to(fixed_config["device"])
-    #     # Collapse the batch dimension
-    #     data = data.view(data.size(0), -1)
-    #     labels_ = labels_.view(-1)
-    #     real_data_list.append(data.cpu().detach().numpy())
-    #     real_labels_list.append(labels_.cpu().detach().numpy())
-
-
-    # # Convert lists to numpy arrays
-    # gen_data = np.concatenate(gen_data_list, axis=0)
-    # gen_labels = np.concatenate(gen_labels_list, axis=0)
-    # real_data = np.concatenate(real_data_list, axis=0)
-    # real_labels = np.concatenate(real_labels_list, axis=0)
-
-    # # Perform t-SNE visualization
-
-    # tsne = TSNE(n_components=2, perplexity=10, n_iter=1000)
-    # combined_data = np.concatenate((gen_data, real_data), axis=0)
-    # gen_data_embedded = tsne.fit_transform(combined_data)
-
-    # combined_labels = np.concatenate((gen_labels, real_labels), axis=0)
-    # plt.figure(figsize=(10, 10))
-    # sns.scatterplot(
-    #     x=gen_data_embedded[:, 0],
-    #     y=gen_data_embedded[:, 1],
-    #     hue=combined_labels,
-    #     palette="Set1",
-    #     legend="full",
-    # )
-    # plt.title("t-SNE of Generated Data")
-    # plt.show()
-
-    # Calculate the mean distance between generated and real data
-    # gen_data_tensor = torch.tensor(gen_data, dtype=torch.float32).to(fixed_config["device"])
-    # real_data_tensor = torch.tensor(real_data, dtype=torch.float32).to(fixed_config["device"])
-    # # make same size
-    # if gen_data_tensor.size(0) != real_data_tensor.size(0):
-    #     min_size = min(gen_data_tensor.size(0), real_data_tensor.size(0))
-    #     gen_data_tensor = gen_data_tensor[:min_size]
-    #     real_data_tensor = real_data_tensor[:min_size]
-
-    # mean_distance = torch.mean(torch.norm(gen_data_tensor - real_data_tensor, dim=1))
-    # # Calculate the covariance difference
-    # gen_cov = torch.cov(gen_data_tensor.T)
-    # real_cov = torch.cov(real_data_tensor.T)
-    # cov_diff = torch.norm(gen_cov - real_cov)
-    # # Calculate cosine similarity
-    # gen_data_tensor = torch.nn.functional.normalize(gen_data_tensor, dim=1)
-    # real_data_tensor = torch.nn.functional.normalize(real_data_tensor, dim=1)
-    # cosine_similarity = torch.nn.functional.cosine_similarity(gen_data_tensor, real_data_tensor, dim=1)
-    # mean_cosine_similarity = torch.mean(cosine_similarity)
-
-    # print("Mean cosine similarity:", mean_cosine_similarity.item())
-    # print("Mean distance:", mean_distance.item())
-    # print("Covariance diff:", cov_diff.item())
 
     # Keep track of val accuracy for when returning
     val_acc = 0.0

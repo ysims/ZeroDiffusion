@@ -26,13 +26,10 @@
 # The function returns validation and training datasets, and some dataset parameters
 
 
-import numpy as np
 import pickle
 import sys
 import torch
 from concurrent.futures import ThreadPoolExecutor
-
-np.set_printoptions(threshold=sys.maxsize)
 
 
 def process_sample(i, all_labels, all_features, all_auxiliary, split, val_classes, test_classes):
@@ -59,9 +56,9 @@ def create_esc50_datasets(file, split, val_classes, test_classes, device):
     with open(file, "rb") as f:
         data = pickle.load(f)
 
-    all_labels = np.array(data["labels"])
-    all_features = np.array([list(d.to("cpu")[0]) for d in data["features"]])
-    all_auxiliary = np.array(data["auxiliary"])
+    all_labels = torch.as_tensor(data["labels"])
+    all_features = torch.stack([d.to("cpu")[0] for d in data["features"]])
+    all_auxiliary = torch.as_tensor(data["auxiliary"])
 
     train_labels, train_features, train_auxiliary = [], [], []
     val_labels, val_features, val_auxiliary = [], [], []
@@ -96,22 +93,18 @@ def create_esc50_datasets(file, split, val_classes, test_classes, device):
             val_auxiliary.append(auxiliary)
 
     # Convert to tensors and remove duplicates
-    unique_val_auxiliary = torch.tensor(
-        np.unique([tuple(a) for a in val_auxiliary], axis=0)
-    ).to(device)
-    unique_train_auxiliary = torch.tensor(
-        np.unique([tuple(a) for a in train_auxiliary], axis=0)
-    ).to(device)
+    unique_val_auxiliary = torch.unique(torch.stack(val_auxiliary), dim=0).to(device)
+    unique_train_auxiliary = torch.unique(torch.stack(train_auxiliary), dim=0).to(device)
 
     train_dataset = ESC50Dataset(
-        torch.tensor(train_labels).float().to(device),
-        torch.tensor(train_features).float().to(device),
-        torch.tensor(train_auxiliary).float().to(device),
+        torch.stack([torch.as_tensor(label) for label in train_labels]).float().to(device),
+        torch.stack(train_features).float().to(device),
+        torch.stack(train_auxiliary).float().to(device),
     )
     val_dataset = ESC50Dataset(
-        torch.tensor(val_labels).float().to(device),
-        torch.tensor(val_features).float().to(device),
-        torch.tensor(val_auxiliary).float().to(device),
+        torch.stack([torch.as_tensor(label) for label in val_labels]).float().to(device),
+        torch.stack(val_features).float().to(device),
+        torch.stack(val_auxiliary).float().to(device),
     )
 
     dataset_params = {
