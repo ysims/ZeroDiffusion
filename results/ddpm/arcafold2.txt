@@ -1,0 +1,257 @@
+Running 10 trials with DDPM method.
+
+=== Trial 1/10 with seed 5798102 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.159845 	Val Loss: 1.141273
+DDPM Epoch 101 	 Loss: 0.694283 	Val Loss: 0.694265
+Epoch 1 	 Train Loss: 2.088760 	 Train acc: 0.535180 	 Val Loss: 1.440374 	 Val acc 0.536292
+Epoch 2 	 Train Loss: 1.001531 	 Train acc: 0.793721 	 Val Loss: 1.481004 	 Val acc 0.520770
+Epoch 3 	 Train Loss: 0.803321 	 Train acc: 0.808970 	 Val Loss: 1.524745 	 Val acc 0.511369
+Epoch 4 	 Train Loss: 0.701635 	 Train acc: 0.818949 	 Val Loss: 1.612869 	 Val acc 0.493004
+Epoch 5 	 Train Loss: 0.639933 	 Train acc: 0.827934 	 Val Loss: 1.734624 	 Val acc 0.466113
+Epoch 6 	 Train Loss: 0.597957 	 Train acc: 0.837084 	 Val Loss: 1.905088 	 Val acc 0.404023
+Epoch 7 	 Train Loss: 0.568266 	 Train acc: 0.843704 	 Val Loss: 2.021033 	 Val acc 0.376913
+Epoch 8 	 Train Loss: 0.544456 	 Train acc: 0.849333 	 Val Loss: 2.175457 	 Val acc 0.320944
+Epoch 9 	 Train Loss: 0.527302 	 Train acc: 0.853979 	 Val Loss: 2.081163 	 Val acc 0.348710
+Epoch 10 	 Train Loss: 0.511660 	 Train acc: 0.859392 	 Val Loss: 2.166450 	 Val acc 0.329252
+Epoch 11 	 Train Loss: 0.499257 	 Train acc: 0.862181 	 Val Loss: 2.266599 	 Val acc 0.300831
+Epoch 12 	 Train Loss: 0.488228 	 Train acc: 0.865872 	 Val Loss: 2.293807 	 Val acc 0.280498
+Epoch 13 	 Train Loss: 0.479607 	 Train acc: 0.869299 	 Val Loss: 2.289460 	 Val acc 0.279187
+Epoch 14 	 Train Loss: 0.471563 	 Train acc: 0.870529 	 Val Loss: 2.402439 	 Val acc 0.266944
+Epoch 15 	 Train Loss: 0.465091 	 Train acc: 0.872691 	 Val Loss: 2.290051 	 Val acc 0.307608
+Epoch 16 	 Train Loss: 0.458553 	 Train acc: 0.874216 	 Val Loss: 2.328309 	 Val acc 0.297551
+Epoch 17 	 Train Loss: 0.453994 	 Train acc: 0.875472 	 Val Loss: 2.426579 	 Val acc 0.274814
+Epoch 18 	 Train Loss: 0.448363 	 Train acc: 0.876055 	 Val Loss: 2.317826 	 Val acc 0.311762
+Epoch 19 	 Train Loss: 0.443495 	 Train acc: 0.877052 	 Val Loss: 2.491735 	 Val acc 0.261041
+Epoch 20 	 Train Loss: 0.440196 	 Train acc: 0.878841 	 Val Loss: 2.446208 	 Val acc 0.277219
+
+=== Trial 2/10 with seed 6606540 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.162166 	Val Loss: 1.144586
+DDPM Epoch 101 	 Loss: 0.695539 	Val Loss: 0.693809
+Epoch 1 	 Train Loss: 2.118438 	 Train acc: 0.529270 	 Val Loss: 1.412790 	 Val acc 0.530389
+Epoch 2 	 Train Loss: 0.949476 	 Train acc: 0.793652 	 Val Loss: 1.460734 	 Val acc 0.529733
+Epoch 3 	 Train Loss: 0.771585 	 Train acc: 0.811210 	 Val Loss: 1.515257 	 Val acc 0.519021
+Epoch 4 	 Train Loss: 0.683618 	 Train acc: 0.819861 	 Val Loss: 1.614745 	 Val acc 0.479668
+Epoch 5 	 Train Loss: 0.628659 	 Train acc: 0.829431 	 Val Loss: 1.728166 	 Val acc 0.444469
+Epoch 6 	 Train Loss: 0.593266 	 Train acc: 0.836874 	 Val Loss: 1.787033 	 Val acc 0.409051
+Epoch 7 	 Train Loss: 0.566981 	 Train acc: 0.842770 	 Val Loss: 1.801417 	 Val acc 0.410144
+Epoch 8 	 Train Loss: 0.545470 	 Train acc: 0.848350 	 Val Loss: 1.901044 	 Val acc 0.372978
+Epoch 9 	 Train Loss: 0.528128 	 Train acc: 0.854083 	 Val Loss: 1.942034 	 Val acc 0.367512
+Epoch 10 	 Train Loss: 0.514629 	 Train acc: 0.856245 	 Val Loss: 1.943191 	 Val acc 0.367731
+Epoch 11 	 Train Loss: 0.502454 	 Train acc: 0.859677 	 Val Loss: 1.910898 	 Val acc 0.386533
+Epoch 12 	 Train Loss: 0.492434 	 Train acc: 0.862420 	 Val Loss: 1.869435 	 Val acc 0.398776
+Epoch 13 	 Train Loss: 0.483822 	 Train acc: 0.864757 	 Val Loss: 1.939832 	 Val acc 0.378881
+Epoch 14 	 Train Loss: 0.474536 	 Train acc: 0.868159 	 Val Loss: 2.022883 	 Val acc 0.360516
+Epoch 15 	 Train Loss: 0.468868 	 Train acc: 0.869912 	 Val Loss: 1.983224 	 Val acc 0.384128
+Epoch 16 	 Train Loss: 0.462278 	 Train acc: 0.871858 	 Val Loss: 1.947843 	 Val acc 0.396808
+Epoch 17 	 Train Loss: 0.457448 	 Train acc: 0.872591 	 Val Loss: 1.967002 	 Val acc 0.395059
+Epoch 18 	 Train Loss: 0.451793 	 Train acc: 0.873853 	 Val Loss: 2.024218 	 Val acc 0.386751
+Epoch 19 	 Train Loss: 0.447734 	 Train acc: 0.875641 	 Val Loss: 2.010186 	 Val acc 0.384346
+Epoch 20 	 Train Loss: 0.444067 	 Train acc: 0.877237 	 Val Loss: 1.975516 	 Val acc 0.410800
+
+=== Trial 3/10 with seed 7464261 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.147823 	Val Loss: 1.132179
+DDPM Epoch 101 	 Loss: 0.695067 	Val Loss: 0.694490
+Epoch 1 	 Train Loss: 2.131807 	 Train acc: 0.520073 	 Val Loss: 1.410160 	 Val acc 0.532794
+Epoch 2 	 Train Loss: 1.014458 	 Train acc: 0.790118 	 Val Loss: 1.397736 	 Val acc 0.537604
+Epoch 3 	 Train Loss: 0.808152 	 Train acc: 0.805770 	 Val Loss: 1.457304 	 Val acc 0.515960
+Epoch 4 	 Train Loss: 0.704390 	 Train acc: 0.817806 	 Val Loss: 1.529765 	 Val acc 0.490599
+Epoch 5 	 Train Loss: 0.642849 	 Train acc: 0.827934 	 Val Loss: 1.609997 	 Val acc 0.472234
+Epoch 6 	 Train Loss: 0.600021 	 Train acc: 0.837801 	 Val Loss: 1.663129 	 Val acc 0.459991
+Epoch 7 	 Train Loss: 0.569425 	 Train acc: 0.845799 	 Val Loss: 1.764340 	 Val acc 0.439003
+Epoch 8 	 Train Loss: 0.546742 	 Train acc: 0.850837 	 Val Loss: 1.802119 	 Val acc 0.434631
+Epoch 9 	 Train Loss: 0.527041 	 Train acc: 0.856038 	 Val Loss: 1.809420 	 Val acc 0.426760
+Epoch 10 	 Train Loss: 0.512705 	 Train acc: 0.859031 	 Val Loss: 1.903873 	 Val acc 0.401836
+Epoch 11 	 Train Loss: 0.500908 	 Train acc: 0.862281 	 Val Loss: 1.975012 	 Val acc 0.382597
+Epoch 12 	 Train Loss: 0.489212 	 Train acc: 0.866506 	 Val Loss: 2.051794 	 Val acc 0.355269
+Epoch 13 	 Train Loss: 0.479698 	 Train acc: 0.868259 	 Val Loss: 1.948563 	 Val acc 0.397245
+Epoch 14 	 Train Loss: 0.471337 	 Train acc: 0.870988 	 Val Loss: 1.975479 	 Val acc 0.389156
+Epoch 15 	 Train Loss: 0.464309 	 Train acc: 0.873169 	 Val Loss: 1.949261 	 Val acc 0.404679
+Epoch 16 	 Train Loss: 0.458442 	 Train acc: 0.873444 	 Val Loss: 2.065078 	 Val acc 0.376694
+Epoch 17 	 Train Loss: 0.453303 	 Train acc: 0.874391 	 Val Loss: 2.063685 	 Val acc 0.356143
+Epoch 18 	 Train Loss: 0.447843 	 Train acc: 0.876753 	 Val Loss: 2.051793 	 Val acc 0.373415
+Epoch 19 	 Train Loss: 0.442772 	 Train acc: 0.878926 	 Val Loss: 2.090236 	 Val acc 0.372759
+Epoch 20 	 Train Loss: 0.437669 	 Train acc: 0.879931 	 Val Loss: 2.161813 	 Val acc 0.354832
+
+=== Trial 4/10 with seed 2959692 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.171410 	Val Loss: 1.157490
+DDPM Epoch 101 	 Loss: 0.697710 	Val Loss: 0.696922
+Epoch 1 	 Train Loss: 2.072604 	 Train acc: 0.548163 	 Val Loss: 1.385646 	 Val acc 0.533231
+Epoch 2 	 Train Loss: 1.021976 	 Train acc: 0.794911 	 Val Loss: 1.511352 	 Val acc 0.519021
+Epoch 3 	 Train Loss: 0.814354 	 Train acc: 0.809960 	 Val Loss: 1.646091 	 Val acc 0.485133
+Epoch 4 	 Train Loss: 0.706030 	 Train acc: 0.821721 	 Val Loss: 1.778963 	 Val acc 0.440315
+Epoch 5 	 Train Loss: 0.641088 	 Train acc: 0.830535 	 Val Loss: 1.977746 	 Val acc 0.369698
+Epoch 6 	 Train Loss: 0.597374 	 Train acc: 0.839143 	 Val Loss: 2.191265 	 Val acc 0.295802
+Epoch 7 	 Train Loss: 0.566605 	 Train acc: 0.845906 	 Val Loss: 2.362737 	 Val acc 0.261915
+Epoch 8 	 Train Loss: 0.545677 	 Train acc: 0.852411 	 Val Loss: 2.350258 	 Val acc 0.268474
+Epoch 9 	 Train Loss: 0.528425 	 Train acc: 0.855180 	 Val Loss: 2.523183 	 Val acc 0.232401
+Epoch 10 	 Train Loss: 0.514419 	 Train acc: 0.859979 	 Val Loss: 2.602402 	 Val acc 0.207258
+Epoch 11 	 Train Loss: 0.501846 	 Train acc: 0.862302 	 Val Loss: 2.732120 	 Val acc 0.196327
+Epoch 12 	 Train Loss: 0.492830 	 Train acc: 0.863114 	 Val Loss: 2.858960 	 Val acc 0.183428
+Epoch 13 	 Train Loss: 0.483452 	 Train acc: 0.866563 	 Val Loss: 2.755439 	 Val acc 0.186270
+Epoch 14 	 Train Loss: 0.475780 	 Train acc: 0.869385 	 Val Loss: 2.766138 	 Val acc 0.199606
+Epoch 15 	 Train Loss: 0.469518 	 Train acc: 0.869677 	 Val Loss: 2.918941 	 Val acc 0.158067
+Epoch 16 	 Train Loss: 0.464912 	 Train acc: 0.870544 	 Val Loss: 3.013016 	 Val acc 0.156318
+Epoch 17 	 Train Loss: 0.458923 	 Train acc: 0.872021 	 Val Loss: 2.968088 	 Val acc 0.157630
+Epoch 18 	 Train Loss: 0.454263 	 Train acc: 0.872492 	 Val Loss: 2.966213 	 Val acc 0.159816
+Epoch 19 	 Train Loss: 0.449562 	 Train acc: 0.874466 	 Val Loss: 2.895512 	 Val acc 0.161347
+Epoch 20 	 Train Loss: 0.444421 	 Train acc: 0.874857 	 Val Loss: 2.855292 	 Val acc 0.180367
+
+=== Trial 5/10 with seed 9573789 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.142065 	Val Loss: 1.126120
+DDPM Epoch 101 	 Loss: 0.695668 	Val Loss: 0.694797
+Epoch 1 	 Train Loss: 2.127041 	 Train acc: 0.522247 	 Val Loss: 1.456046 	 Val acc 0.529952
+Epoch 2 	 Train Loss: 1.003719 	 Train acc: 0.792403 	 Val Loss: 1.499342 	 Val acc 0.532794
+Epoch 3 	 Train Loss: 0.800389 	 Train acc: 0.808115 	 Val Loss: 1.581485 	 Val acc 0.532794
+Epoch 4 	 Train Loss: 0.695590 	 Train acc: 0.819113 	 Val Loss: 1.640111 	 Val acc 0.526672
+Epoch 5 	 Train Loss: 0.633756 	 Train acc: 0.827785 	 Val Loss: 1.739093 	 Val acc 0.511369
+Epoch 6 	 Train Loss: 0.593176 	 Train acc: 0.835691 	 Val Loss: 1.806365 	 Val acc 0.491036
+Epoch 7 	 Train Loss: 0.565147 	 Train acc: 0.841666 	 Val Loss: 1.848138 	 Val acc 0.480979
+Epoch 8 	 Train Loss: 0.543257 	 Train acc: 0.848886 	 Val Loss: 1.871930 	 Val acc 0.467425
+Epoch 9 	 Train Loss: 0.526097 	 Train acc: 0.852561 	 Val Loss: 1.972412 	 Val acc 0.449934
+Epoch 10 	 Train Loss: 0.510111 	 Train acc: 0.858739 	 Val Loss: 1.961380 	 Val acc 0.437910
+Epoch 11 	 Train Loss: 0.498119 	 Train acc: 0.860577 	 Val Loss: 1.987785 	 Val acc 0.450809
+Epoch 12 	 Train Loss: 0.486028 	 Train acc: 0.864461 	 Val Loss: 2.052319 	 Val acc 0.427853
+Epoch 13 	 Train Loss: 0.477594 	 Train acc: 0.867012 	 Val Loss: 2.071854 	 Val acc 0.418889
+Epoch 14 	 Train Loss: 0.469132 	 Train acc: 0.867169 	 Val Loss: 2.040908 	 Val acc 0.433537
+Epoch 15 	 Train Loss: 0.461721 	 Train acc: 0.869859 	 Val Loss: 2.106007 	 Val acc 0.421294
+Epoch 16 	 Train Loss: 0.456388 	 Train acc: 0.872962 	 Val Loss: 2.065900 	 Val acc 0.419983
+Epoch 17 	 Train Loss: 0.448702 	 Train acc: 0.875556 	 Val Loss: 2.116902 	 Val acc 0.423699
+Epoch 18 	 Train Loss: 0.444712 	 Train acc: 0.876753 	 Val Loss: 2.118268 	 Val acc 0.408395
+Epoch 19 	 Train Loss: 0.438725 	 Train acc: 0.875734 	 Val Loss: 2.145807 	 Val acc 0.408614
+Epoch 20 	 Train Loss: 0.434838 	 Train acc: 0.878083 	 Val Loss: 2.183264 	 Val acc 0.393966
+
+=== Trial 6/10 with seed 2980184 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.163833 	Val Loss: 1.148502
+DDPM Epoch 101 	 Loss: 0.697782 	Val Loss: 0.696067
+Epoch 1 	 Train Loss: 2.052377 	 Train acc: 0.554583 	 Val Loss: 1.470944 	 Val acc 0.519021
+Epoch 2 	 Train Loss: 1.020460 	 Train acc: 0.792826 	 Val Loss: 1.511914 	 Val acc 0.522081
+Epoch 3 	 Train Loss: 0.815384 	 Train acc: 0.808688 	 Val Loss: 1.579954 	 Val acc 0.520988
+Epoch 4 	 Train Loss: 0.707549 	 Train acc: 0.819505 	 Val Loss: 1.677053 	 Val acc 0.507215
+Epoch 5 	 Train Loss: 0.644087 	 Train acc: 0.830219 	 Val Loss: 1.760430 	 Val acc 0.487538
+Epoch 6 	 Train Loss: 0.601502 	 Train acc: 0.838516 	 Val Loss: 1.907551 	 Val acc 0.464801
+Epoch 7 	 Train Loss: 0.570399 	 Train acc: 0.845642 	 Val Loss: 1.976506 	 Val acc 0.444906
+Epoch 8 	 Train Loss: 0.545243 	 Train acc: 0.850231 	 Val Loss: 2.020298 	 Val acc 0.437910
+Epoch 9 	 Train Loss: 0.528127 	 Train acc: 0.856306 	 Val Loss: 2.087635 	 Val acc 0.419108
+Epoch 10 	 Train Loss: 0.511681 	 Train acc: 0.858618 	 Val Loss: 2.130586 	 Val acc 0.413424
+Epoch 11 	 Train Loss: 0.499341 	 Train acc: 0.862829 	 Val Loss: 2.219913 	 Val acc 0.396152
+Epoch 12 	 Train Loss: 0.487111 	 Train acc: 0.866007 	 Val Loss: 2.171156 	 Val acc 0.412112
+Epoch 13 	 Train Loss: 0.479010 	 Train acc: 0.868865 	 Val Loss: 2.254417 	 Val acc 0.389593
+Epoch 14 	 Train Loss: 0.468424 	 Train acc: 0.871145 	 Val Loss: 2.244723 	 Val acc 0.400962
+Epoch 15 	 Train Loss: 0.462115 	 Train acc: 0.874344 	 Val Loss: 2.221272 	 Val acc 0.416703
+Epoch 16 	 Train Loss: 0.455851 	 Train acc: 0.875705 	 Val Loss: 2.278339 	 Val acc 0.400962
+Epoch 17 	 Train Loss: 0.448953 	 Train acc: 0.876846 	 Val Loss: 2.236802 	 Val acc 0.400306
+Epoch 18 	 Train Loss: 0.444723 	 Train acc: 0.877776 	 Val Loss: 2.185525 	 Val acc 0.438347
+Epoch 19 	 Train Loss: 0.440349 	 Train acc: 0.879828 	 Val Loss: 2.276327 	 Val acc 0.403585
+Epoch 20 	 Train Loss: 0.435358 	 Train acc: 0.881097 	 Val Loss: 2.297743 	 Val acc 0.398557
+
+=== Trial 7/10 with seed 7233324 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.148256 	Val Loss: 1.135266
+DDPM Epoch 101 	 Loss: 0.698770 	Val Loss: 0.693007
+Epoch 1 	 Train Loss: 2.211837 	 Train acc: 0.498525 	 Val Loss: 1.460666 	 Val acc 0.518146
+Epoch 2 	 Train Loss: 0.982646 	 Train acc: 0.791422 	 Val Loss: 1.484232 	 Val acc 0.512024
+Epoch 3 	 Train Loss: 0.787749 	 Train acc: 0.807092 	 Val Loss: 1.572294 	 Val acc 0.480761
+Epoch 4 	 Train Loss: 0.691290 	 Train acc: 0.817994 	 Val Loss: 1.722877 	 Val acc 0.435286
+Epoch 5 	 Train Loss: 0.632738 	 Train acc: 0.829488 	 Val Loss: 1.763692 	 Val acc 0.420638
+Epoch 6 	 Train Loss: 0.594161 	 Train acc: 0.836130 	 Val Loss: 1.906418 	 Val acc 0.381941
+Epoch 7 	 Train Loss: 0.566360 	 Train acc: 0.842337 	 Val Loss: 1.978205 	 Val acc 0.364889
+Epoch 8 	 Train Loss: 0.545829 	 Train acc: 0.847559 	 Val Loss: 2.180886 	 Val acc 0.331876
+Epoch 9 	 Train Loss: 0.531150 	 Train acc: 0.852041 	 Val Loss: 2.189543 	 Val acc 0.325536
+Epoch 10 	 Train Loss: 0.518887 	 Train acc: 0.855131 	 Val Loss: 2.136543 	 Val acc 0.330345
+Epoch 11 	 Train Loss: 0.507584 	 Train acc: 0.857734 	 Val Loss: 2.149641 	 Val acc 0.331439
+Epoch 12 	 Train Loss: 0.498396 	 Train acc: 0.860178 	 Val Loss: 2.114722 	 Val acc 0.343244
+Epoch 13 	 Train Loss: 0.490730 	 Train acc: 0.863941 	 Val Loss: 2.229267 	 Val acc 0.319633
+Epoch 14 	 Train Loss: 0.484515 	 Train acc: 0.864451 	 Val Loss: 2.124236 	 Val acc 0.350459
+Epoch 15 	 Train Loss: 0.477994 	 Train acc: 0.865359 	 Val Loss: 2.244143 	 Val acc 0.323131
+Epoch 16 	 Train Loss: 0.472820 	 Train acc: 0.866984 	 Val Loss: 2.148405 	 Val acc 0.341495
+Epoch 17 	 Train Loss: 0.467375 	 Train acc: 0.869171 	 Val Loss: 2.174927 	 Val acc 0.341495
+Epoch 18 	 Train Loss: 0.462723 	 Train acc: 0.870432 	 Val Loss: 2.167169 	 Val acc 0.336248
+Epoch 19 	 Train Loss: 0.459054 	 Train acc: 0.870803 	 Val Loss: 2.210606 	 Val acc 0.338435
+Epoch 20 	 Train Loss: 0.455825 	 Train acc: 0.871366 	 Val Loss: 2.262555 	 Val acc 0.328815
+
+=== Trial 8/10 with seed 1768714 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.162902 	Val Loss: 1.144541
+DDPM Epoch 101 	 Loss: 0.696814 	Val Loss: 0.693604
+Epoch 1 	 Train Loss: 2.146264 	 Train acc: 0.519859 	 Val Loss: 1.422986 	 Val acc 0.520988
+Epoch 2 	 Train Loss: 0.989334 	 Train acc: 0.791557 	 Val Loss: 1.454907 	 Val acc 0.520114
+Epoch 3 	 Train Loss: 0.790629 	 Train acc: 0.806849 	 Val Loss: 1.575267 	 Val acc 0.473546
+Epoch 4 	 Train Loss: 0.692561 	 Train acc: 0.816355 	 Val Loss: 1.685806 	 Val acc 0.424574
+Epoch 5 	 Train Loss: 0.633655 	 Train acc: 0.826538 	 Val Loss: 1.798234 	 Val acc 0.377569
+Epoch 6 	 Train Loss: 0.592736 	 Train acc: 0.835174 	 Val Loss: 1.984137 	 Val acc 0.325317
+Epoch 7 	 Train Loss: 0.561668 	 Train acc: 0.844744 	 Val Loss: 2.088441 	 Val acc 0.278531
+Epoch 8 	 Train Loss: 0.537275 	 Train acc: 0.851107 	 Val Loss: 2.123666 	 Val acc 0.262134
+Epoch 9 	 Train Loss: 0.518134 	 Train acc: 0.856095 	 Val Loss: 2.241154 	 Val acc 0.221469
+Epoch 10 	 Train Loss: 0.502667 	 Train acc: 0.861532 	 Val Loss: 2.272139 	 Val acc 0.214036
+Epoch 11 	 Train Loss: 0.491175 	 Train acc: 0.863243 	 Val Loss: 2.279412 	 Val acc 0.196983
+Epoch 12 	 Train Loss: 0.481272 	 Train acc: 0.867042 	 Val Loss: 2.339023 	 Val acc 0.190206
+Epoch 13 	 Train Loss: 0.472879 	 Train acc: 0.867807 	 Val Loss: 2.395111 	 Val acc 0.182335
+Epoch 14 	 Train Loss: 0.464894 	 Train acc: 0.870700 	 Val Loss: 2.395880 	 Val acc 0.191955
+Epoch 15 	 Train Loss: 0.457200 	 Train acc: 0.873083 	 Val Loss: 2.384824 	 Val acc 0.183865
+Epoch 16 	 Train Loss: 0.451998 	 Train acc: 0.875064 	 Val Loss: 2.363257 	 Val acc 0.199825
+Epoch 17 	 Train Loss: 0.446483 	 Train acc: 0.876318 	 Val Loss: 2.371294 	 Val acc 0.197202
+Epoch 18 	 Train Loss: 0.441409 	 Train acc: 0.877401 	 Val Loss: 2.381190 	 Val acc 0.202011
+Epoch 19 	 Train Loss: 0.437184 	 Train acc: 0.878606 	 Val Loss: 2.358866 	 Val acc 0.207914
+Epoch 20 	 Train Loss: 0.432688 	 Train acc: 0.879087 	 Val Loss: 2.509699 	 Val acc 0.177307
+
+=== Trial 9/10 with seed 6295554 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.160792 	Val Loss: 1.143475
+DDPM Epoch 101 	 Loss: 0.696104 	Val Loss: 0.694848
+Epoch 1 	 Train Loss: 2.099500 	 Train acc: 0.533569 	 Val Loss: 1.402420 	 Val acc 0.535636
+Epoch 2 	 Train Loss: 0.984092 	 Train acc: 0.794964 	 Val Loss: 1.442589 	 Val acc 0.536948
+Epoch 3 	 Train Loss: 0.785390 	 Train acc: 0.810117 	 Val Loss: 1.541989 	 Val acc 0.517053
+Epoch 4 	 Train Loss: 0.682226 	 Train acc: 0.822505 	 Val Loss: 1.648349 	 Val acc 0.497376
+Epoch 5 	 Train Loss: 0.616507 	 Train acc: 0.834882 	 Val Loss: 1.763019 	 Val acc 0.462396
+Epoch 6 	 Train Loss: 0.571761 	 Train acc: 0.846490 	 Val Loss: 1.797458 	 Val acc 0.467206
+Epoch 7 	 Train Loss: 0.542823 	 Train acc: 0.852789 	 Val Loss: 1.851156 	 Val acc 0.469611
+Epoch 8 	 Train Loss: 0.519665 	 Train acc: 0.857898 	 Val Loss: 1.960061 	 Val acc 0.455837
+Epoch 9 	 Train Loss: 0.502205 	 Train acc: 0.862573 	 Val Loss: 2.032906 	 Val acc 0.442938
+Epoch 10 	 Train Loss: 0.487251 	 Train acc: 0.865615 	 Val Loss: 2.041616 	 Val acc 0.448841
+Epoch 11 	 Train Loss: 0.475811 	 Train acc: 0.869763 	 Val Loss: 2.084473 	 Val acc 0.444469
+Epoch 12 	 Train Loss: 0.465087 	 Train acc: 0.872912 	 Val Loss: 2.131371 	 Val acc 0.440533
+Epoch 13 	 Train Loss: 0.456855 	 Train acc: 0.873836 	 Val Loss: 2.114088 	 Val acc 0.448841
+Epoch 14 	 Train Loss: 0.448867 	 Train acc: 0.875895 	 Val Loss: 2.131846 	 Val acc 0.456275
+Epoch 15 	 Train Loss: 0.441402 	 Train acc: 0.879515 	 Val Loss: 2.161215 	 Val acc 0.447748
+Epoch 16 	 Train Loss: 0.434651 	 Train acc: 0.880135 	 Val Loss: 2.175402 	 Val acc 0.449060
+Epoch 17 	 Train Loss: 0.428994 	 Train acc: 0.882938 	 Val Loss: 2.213382 	 Val acc 0.444469
+Epoch 18 	 Train Loss: 0.424876 	 Train acc: 0.883786 	 Val Loss: 2.195852 	 Val acc 0.452558
+Epoch 19 	 Train Loss: 0.418999 	 Train acc: 0.884976 	 Val Loss: 2.241160 	 Val acc 0.437254
+Epoch 20 	 Train Loss: 0.415268 	 Train acc: 0.885674 	 Val Loss: 2.245337 	 Val acc 0.432663
+
+=== Trial 10/10 with seed 7444678 ===
+Training DDPM diffusion model...
+DDPM Epoch 1 	 Loss: 1.150871 	Val Loss: 1.134796
+DDPM Epoch 101 	 Loss: 0.699541 	Val Loss: 0.695953
+Epoch 1 	 Train Loss: 2.114278 	 Train acc: 0.529387 	 Val Loss: 1.445473 	 Val acc 0.520332
+Epoch 2 	 Train Loss: 0.965412 	 Train acc: 0.794971 	 Val Loss: 1.487785 	 Val acc 0.521207
+Epoch 3 	 Train Loss: 0.759840 	 Train acc: 0.814688 	 Val Loss: 1.609650 	 Val acc 0.507652
+Epoch 4 	 Train Loss: 0.660541 	 Train acc: 0.827340 	 Val Loss: 1.748566 	 Val acc 0.472016
+Epoch 5 	 Train Loss: 0.599127 	 Train acc: 0.837312 	 Val Loss: 1.905461 	 Val acc 0.442720
+Epoch 6 	 Train Loss: 0.560142 	 Train acc: 0.846910 	 Val Loss: 2.065235 	 Val acc 0.409707
+Epoch 7 	 Train Loss: 0.532908 	 Train acc: 0.852409 	 Val Loss: 2.235093 	 Val acc 0.362921
+Epoch 8 	 Train Loss: 0.511111 	 Train acc: 0.858639 	 Val Loss: 2.141422 	 Val acc 0.386533
+Epoch 9 	 Train Loss: 0.495532 	 Train acc: 0.861226 	 Val Loss: 2.290894 	 Val acc 0.360079
+Epoch 10 	 Train Loss: 0.481063 	 Train acc: 0.866164 	 Val Loss: 2.291039 	 Val acc 0.361609
+Epoch 11 	 Train Loss: 0.468443 	 Train acc: 0.870411 	 Val Loss: 2.210328 	 Val acc 0.398120
+Epoch 12 	 Train Loss: 0.457586 	 Train acc: 0.874527 	 Val Loss: 2.265895 	 Val acc 0.371447
+Epoch 13 	 Train Loss: 0.447071 	 Train acc: 0.876190 	 Val Loss: 2.298644 	 Val acc 0.367512
+Epoch 14 	 Train Loss: 0.438806 	 Train acc: 0.879119 	 Val Loss: 2.412345 	 Val acc 0.348491
+Epoch 15 	 Train Loss: 0.431861 	 Train acc: 0.880636 	 Val Loss: 2.374153 	 Val acc 0.371010
+Epoch 16 	 Train Loss: 0.424024 	 Train acc: 0.883765 	 Val Loss: 2.394551 	 Val acc 0.366200
+Epoch 17 	 Train Loss: 0.418704 	 Train acc: 0.886031 	 Val Loss: 2.433731 	 Val acc 0.363577
+Epoch 18 	 Train Loss: 0.413464 	 Train acc: 0.885536 	 Val Loss: 2.428607 	 Val acc 0.363577
+Epoch 19 	 Train Loss: 0.407847 	 Train acc: 0.886921 	 Val Loss: 2.435359 	 Val acc 0.365107
+Epoch 20 	 Train Loss: 0.403120 	 Train acc: 0.888838 	 Val Loss: 2.497613 	 Val acc 0.363139
+
+=== DDPM Results ===
+Mean acc is 0.3317665063401837
+Standard deviation acc is 0.09191551108629184
+Best acc is 0.43266287713161344
+Experiment was type fold2 : folder ../ZeroShotESCData/pickles/arca23kfsd/YAMNet_normal_fold2.pickle
