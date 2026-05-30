@@ -92,19 +92,20 @@ def create_esc50_datasets(file, split, val_classes, test_classes, device):
             val_features.append(feature)
             val_auxiliary.append(auxiliary)
 
-    # Convert to tensors and remove duplicates
-    unique_val_auxiliary = torch.unique(torch.stack(val_auxiliary), dim=0).to(device)
-    unique_train_auxiliary = torch.unique(torch.stack(train_auxiliary), dim=0).to(device)
+    # Keep dataset tensors on CPU so DataLoader workers can parallelize effectively.
+    # Batches are moved to the training device in the training loops.
+    unique_val_auxiliary = torch.unique(torch.stack(val_auxiliary), dim=0).float().cpu()
+    unique_train_auxiliary = torch.unique(torch.stack(train_auxiliary), dim=0).float().cpu()
 
     train_dataset = ESC50Dataset(
-        torch.stack([torch.as_tensor(label) for label in train_labels]).float().to(device),
-        torch.stack(train_features).float().to(device),
-        torch.stack(train_auxiliary).float().to(device),
+        torch.stack([torch.as_tensor(label) for label in train_labels]).float().cpu(),
+        torch.stack(train_features).float().cpu(),
+        torch.stack(train_auxiliary).float().cpu(),
     )
     val_dataset = ESC50Dataset(
-        torch.stack([torch.as_tensor(label) for label in val_labels]).float().to(device),
-        torch.stack(val_features).float().to(device),
-        torch.stack(val_auxiliary).float().to(device),
+        torch.stack([torch.as_tensor(label) for label in val_labels]).float().cpu(),
+        torch.stack(val_features).float().cpu(),
+        torch.stack(val_auxiliary).float().cpu(),
     )
 
     dataset_params = {

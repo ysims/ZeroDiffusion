@@ -30,35 +30,46 @@ from torch.utils.data import Dataset
 
 
 class DiffusionDataset(Dataset):
-    def __init__(self, diffusion_model, feature_size, class_aux, num_samples, norm):
+    def __init__(self, diffusion_model, feature_size, class_aux, num_samples, norm, generation_batch_size=128):
         self.data = []
         self.labels = []
 
         # Get the device of the model
         device = next(diffusion_model.parameters()).device
 
+        # Determine if model has generate() method (DDPM) or uses forward (DenoiseNet)
+        has_generate = hasattr(diffusion_model, 'generate') and callable(getattr(diffusion_model, 'generate'))
+        generation_batch_size = max(1, int(generation_batch_size))
+
         # Generate data for unseen classes
-        for c in class_aux:
-            for _ in range(num_samples):
+        with torch.no_grad():
+            for c in class_aux:
                 # Ensure c is a tensor of the same data type as the input tensor
                 c_ = c.clone().detach().to(device).float()
-                # Add noise to the class auxiliary vector
-                aux_noise = c_ + torch.randn_like(c_) * 0.0
-                # Generate a random sample and move it to the model's device
-                # The random sample should have a norm similar to training samples
-                noise = torch.randn(feature_size).to(device)
-                noise = (noise / noise.norm()) * norm  
-                sample = diffusion_model(noise, aux_noise)
-                self.data.append(sample)
-                self.labels.append(c_)
+                generated_for_class = 0
+                while generated_for_class < num_samples:
+                    current_bs = min(generation_batch_size, num_samples - generated_for_class)
 
-        # Convert to tensor
-        self.data = torch.stack(self.data)
-        self.labels = torch.stack(self.labels)
+                    aux_batch = c_.unsqueeze(0).repeat(current_bs, 1)
+                    noise = torch.randn(current_bs, feature_size, device=device)
+                    noise = noise / (noise.norm(dim=1, keepdim=True) + 1e-8)
+                    noise = noise * norm
 
-        # Move data and labels to the model's device
-        self.data = self.data.to(device)
-        self.labels = self.labels.to(device)
+                    # Use appropriate generation method
+                    if has_generate:
+                        # DDPM uses generate() method
+                        samples = diffusion_model.generate(noise, aux_batch)
+                    else:
+                        # DenoiseNet uses forward() method
+                        samples = diffusion_model(noise, aux_batch)
+
+                    self.data.append(samples)
+                    self.labels.append(aux_batch)
+                    generated_for_class += current_bs
+
+        # Store generated samples on CPU for efficient batched transfer during training.
+        self.data = torch.cat(self.data, dim=0).detach().cpu()
+        self.labels = torch.cat(self.labels, dim=0).detach().cpu()
 
     def __len__(self):
         return len(self.data)

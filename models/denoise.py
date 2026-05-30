@@ -22,21 +22,25 @@
 
 # ==============================================================================
 
-# This file contains the Diffusion class, which is a PyTorch artificial neural network module
-# It learns to reconstruct the input data with added noise
+# This file contains the denoising network class, which is a PyTorch artificial neural network module
+# It learns to reconstruct the input data from noisy and auxiliary information
 
 import torch
 from torch import nn
 
-class DAEInterp(nn.Module):
+class DenoiseNet(nn.Module):
     """
-    Denoising Autoencoder with Interpolation-based noise.
+    Conditional Denoising Network with Interpolation-based noise.
+    
+    A feed-forward network that learns to denoise features given auxiliary
+    (class) information. Input features are corrupted with interpolation-based
+    noise and the network learns to reconstruct the original features.
     """
     
     def __init__(self, input_dim, hidden_dim, aux_dim, n_layers=1, dropout=0.3, 
                  activation="leakyrelu", use_residual=False, use_layernorm=False,
                  output_activation="tanh"):
-        super(DAEInterp, self).__init__()
+        super(DenoiseNet, self).__init__()
         
         self.input_dim = input_dim
         self.use_residual = use_residual
@@ -105,7 +109,3 @@ class DAEInterp(nn.Module):
         scaled_noise = noise / (noise_norm + 1e-8) * x_norm
         # Interpolate between x and scaled_noise
         return (1 - epoch_percentage) * x + epoch_percentage * scaled_noise
-
-
-# Alias for backwards compatibility
-Diffusion = DAEInterp

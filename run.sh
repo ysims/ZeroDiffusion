@@ -8,17 +8,20 @@ export PYTHONUNBUFFERED=1
 echo "Running baseline MSE+Interp experiments..."
 
 # # ESC-50: 4 validation folds and a held out test fold
-# uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold04.pickle --dataset ESC-50 --split fold0 --cls_dataset_size 40 > results/escfold0.txt
-# uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold14.pickle --dataset ESC-50 --split fold1 --cls_dataset_size 40 > results/escfold1.txt
-# uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold24.pickle --dataset ESC-50 --split fold2 --cls_dataset_size 40 > results/escfold2.txt
-# uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold34.pickle --dataset ESC-50 --split fold3 --cls_dataset_size 40 > results/escfold3.txt
-# uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold4.pickle --dataset ESC-50 --split test --cls_dataset_size 40 > results/esctest.txt
+uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold04.pickle --dataset ESC-50 --split fold0 --cls_dataset_size 40 > results/escfold0.txt
+uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold14.pickle --dataset ESC-50 --split fold1 --cls_dataset_size 40 > results/escfold1.txt
+uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold24.pickle --dataset ESC-50 --split fold2 --cls_dataset_size 40 > results/escfold2.txt
+uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold34.pickle --dataset ESC-50 --split fold3 --cls_dataset_size 40 > results/escfold3.txt
+uv run python train.py ../ZeroShotESCData/pickles/esc50/ESC_50_synonyms/fold4.pickle --dataset ESC-50 --split test --cls_dataset_size 40 > results/esctest.txt
 
-# # GTZAN - music classification dataset
-# uv run python train.py ../ZeroShotESCData/pickles/gtzan/YAMNet_synonyms_test.pickle --dataset GTZAN --split test --cls_dataset_size 100 > results/gtzan.txt
+# GTZAN - music classification dataset
+uv run python train.py ../ZeroShotESCData/pickles/gtzan/YAMNet_synonyms_test.pickle --dataset GTZAN --split test --cls_dataset_size 100 > results/gtzan.txt
 
-# # UrbanSound8k - small number of classes but many samples per class
-# uv run python train.py ../ZeroShotESCData/pickles/urbansound8k/YAMNet_synonyms_test.pickle --dataset UrbanSound8k --split test --cls_dataset_size 873 > results/urbansound8k.txt
+# UrbanSound8k - small number of classes but many samples per class
+uv run python train.py ../ZeroShotESCData/pickles/urbansound8k/YAMNet_synonyms_test.pickle --dataset UrbanSound8k --split test --cls_dataset_size 873 > results/urbansound8k.txt
+
+# TAU 2019 - a scene classification dataset
+uv run python train.py ../ZeroShotESCData/pickles/tau2019/YAMNet_synonyms_test.pickle --dataset TAU2019 --split test --cls_dataset_size 1440 > results/tau2019.txt
 
 # FSC22 - split into train, val, test, less classes than ESC-50 but more than GTZAN and UrbanSound8k
 uv run python train.py ../ZeroShotESCData/pickles/fsc22/YAMNet_synonyms_val.pickle --dataset FSC22 --split val --cls_dataset_size 75 > results/fscval.txt
